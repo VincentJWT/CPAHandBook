@@ -3,20 +3,54 @@
 <title>CPA HANDBOOK</title>
 </head>
 <style>
+        /* 默认亮色模式（fallback） */
         body {
-            background-color: #00000000;     /* 浅灰色背景 */
-            color: #4e8b73da;                   /* 文字颜色稍深，便于阅读 */
+            background-color: #bbb9b983;      /* 浅灰/白色背景 */
+            color: #62dbd1cc;                 /* 深色文字 */
             margin: 20px;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
         }
         h1 {
-            color: #444;
+            color: #222222;
+        }
+        strong {
+            color: #444444;
         }
         a {
             color: #0066cc;
+            text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
+            color: #004080;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+
+        /* 当系统偏好暗黑模式时覆盖成深色 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #242424;  /* 你的深黑色背景 */
+                color: #62dbd1cc;             /* 浅灰白文字 */
+            }
+            h1 {
+                color: #ffffff;
+            }
+            strong {
+                color: #bbbbbb;
+            }
+            a {
+                color: #4dabf7;             /* 亮蓝链接 */
+            }
+            a:hover {
+                color: #63b3ed;
+            }
         }
     </style>
 <body>
