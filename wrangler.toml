@@ -1,5 +1,5 @@
 # wrangler.toml
-name = "cpahandbook-static"              # 随便起个名字，小写 + - 分隔，唯一即可
+name = "cpahandbook"              # 随便起个名字，小写 + - 分隔，唯一即可
 compatibility_date = "2025-12-29"        # 用最近日期（你的日志是 2025-12-30，往前一天避免 bug）
 compatibility_flags = []                 # 空数组即可
 
