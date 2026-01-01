@@ -1,190 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
-    <div id="login-screen" style="position:fixed; inset:0; background:#fff; z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column;">
-        <h2>CPA Canada Handbook - Access Restricted</h2>
-        <p>PASSWORD</p>
-        <input type="password" id="passwordInput" style="padding:12px; font-size:1.2rem; width:300px; margin:1rem 0;">
-        <button onclick="checkPassword()" style="padding:12px 30px; font-size:1.2rem; background:#0d6efd; color:white; border:none; border-radius:6px; cursor:pointer;">OPEN</button>
-        <p id="errorMsg" style="color:red; margin-top:1rem;"></p>
-    </div>
-
-    <div id="main-content" style="display:none;">
-
-<div style="position: sticky; top: 0; z-index: 1000; background: #ffffff; padding: 12px 20px; border-bottom: 2px solid #0d6efd; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center;">
-    <!-- 实时数字时钟（始终显示） -->
-    <div style="font-size: 2rem; font-weight: bold; color: #0d6efd; margin-bottom: 10px;">
-        <span id="realtime-clock">00:00:00</span>
-    </div>
-
-    <!-- 可折叠倒计时区域 -->
-    <details style="max-width: 1000px; margin: 10px auto; background: #f8f9fa; border-radius: 8px; overflow: hidden;">
-        <summary style="font-size: 1.3rem; font-weight: 600; padding: 12px; background: #e9f3ff; cursor: pointer; color: #0d6efd;">
-            Countdown Tool Click to OPEN/CLOSE MAX 4
-        </summary>
-        
-        <div style="padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-            <!-- Timer 1 -->
-            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
-                <input type="text" id="name1" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
-                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
-                    <input type="number" id="timer1-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
-                    <span>HOUR</span>
-                    <input type="number" id="timer1-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
-                    <span>MIN</span>
-                </div>
-                <div style="margin: 10px 0;">
-                    <button onclick="startTimer(1)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
-                    <button onclick="stopTimer(1)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
-                </div>
-                <div id="display1" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
-            </div>
-
-            <!-- Timer 2 -->
-            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
-                <input type="text" id="name2" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
-                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
-                    <input type="number" id="timer2-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
-                    <span>HOUR</span>
-                    <input type="number" id="timer2-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
-                    <span>MIN</span>
-                </div>
-                <div style="margin: 10px 0;">
-                    <button onclick="startTimer(2)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
-                    <button onclick="stopTimer(2)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
-                </div>
-                <div id="display2" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
-            </div>
-
-            <!-- Timer 3 -->
-            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
-                <input type="text" id="name3" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
-                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
-                    <input type="number" id="timer3-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
-                    <span>HOUR</span>
-                    <input type="number" id="timer3-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
-                    <span>MIN</span>
-                </div>
-                <div style="margin: 10px 0;">
-                    <button onclick="startTimer(3)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
-                    <button onclick="stopTimer(3)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
-                </div>
-                <div id="display3" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
-            </div>
-
-            <!-- Timer 4 -->
-            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
-                <input type="text" id="name4" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
-                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
-                    <input type="number" id="timer4-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
-                    <span>HOUR</span>
-                    <input type="number" id="timer4-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
-                    <span>MIN</span>
-                </div>
-                <div style="margin: 10px 0;">
-                    <button onclick="startTimer(4)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
-                    <button onclick="stopTimer(4)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
-                </div>
-                <div id="display4" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
-            </div>
-        </div>
-    </details>
-</div>
-
-<script>
-// 实时钟（保持不变）
-function updateClock() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('realtime-clock').textContent = timeString;
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-// 倒计时逻辑（精确到秒 + 自定义名称）
-let countdownIntervals = [null, null, null, null];
-let remainingSeconds = [0, 0, 0, 0]; // 记录每个计时器的剩余秒数
-
-function startTimer(id) {
-    const hourInput = document.getElementById(`timer${id}-hour`);
-    const minInput = document.getElementById(`timer${id}-min`);
-    
-    let totalSeconds = (parseInt(hourInput.value) || 0) * 3600 + (parseInt(minInput.value) || 0) * 60;
-    
-    if (totalSeconds <= 0) {
-        alert(`Timer ${id}：MINMUM 1 MIN`);
-        return;
-    }
-
-    // 清除旧计时器
-    if (countdownIntervals[id-1]) {
-        clearInterval(countdownIntervals[id-1]);
-    }
-
-    const display = document.getElementById(`display${id}`);
-    display.style.color = '#28a745'; // 绿色运行中
-
-    // 立即显示初始时间
-    const initHours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
-    const initMins = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
-    const initSecs = (totalSeconds % 60).toString().padStart(2, '0');
-    display.textContent = `${initHours}:${initMins}:${initSecs}`;
-
-    remainingSeconds[id-1] = totalSeconds;
-
-    countdownIntervals[id-1] = setInterval(() => {
-        remainingSeconds[id-1]--;
-        if (remainingSeconds[id-1] <= 0) {
-            clearInterval(countdownIntervals[id-1]);
-            countdownIntervals[id-1] = null;
-            display.textContent = '00:00:00';
-            display.style.color = '#dc3545'; // 红色结束
-            const timerName = document.getElementById(`name${id}`).value.trim() || `Timer ${id}`;
-            alert(`${timerName} TimesUp！`);
-            return;
-        }
-
-        const hours = Math.floor(remainingSeconds[id-1] / 3600).toString().padStart(2, '0');
-        const mins = Math.floor((remainingSeconds[id-1] % 3600) / 60).toString().padStart(2, '0');
-        const secs = (remainingSeconds[id-1] % 60).toString().padStart(2, '0');
-        display.textContent = `${hours}:${mins}:${secs}`;
-    }, 1000); // 每秒更新
-}
-
-function stopTimer(id) {
-    if (countdownIntervals[id-1]) {
-        clearInterval(countdownIntervals[id-1]);
-        countdownIntervals[id-1] = null;
-    }
-    const display = document.getElementById(`display${id}`);
-    display.textContent = '00:00:00';
-    display.style.color = '#212529'; // 默认色
-}
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPA Canada Handbook - 2025-12</title>
     <style>
-        body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background: #f8f9fa; color: #212529; font-size: 1.1rem; }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 16px;
+            background: #f8f9fa;
+            color: #212529;
+            font-size: 1.1rem;
+        }
         main { max-width: 1200px; margin: 0 auto; }
-        h1 { color: #0d6efd; margin-bottom: 1.5rem; }
-        .search-box { margin: 1.5rem 0; }
-        .search-box input { width: 100%; max-width: 500px; padding: 0.8rem; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 6px; }
-        details { margin: 1.2rem 0; border: 1px solid #ddd; border-radius: 8px; padding: 0.6rem; background: white; }
-        summary { cursor: pointer; font-weight: bold; color: #0d6efd; font-size: 1.4rem; padding: 0.8rem; background: #e9f3ff; border-radius: 6px; }
+        h1 { color: #0d6efd; margin-bottom: 1.5rem; text-align: center; }
+        .search-box { margin: 1.5rem 0; text-align: center; }
+        .search-box input {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.8rem;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        details {
+            margin: 1.2rem 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 0.6rem;
+            background: white;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #0d6efd;
+            font-size: 1.4rem;
+            padding: 0.8rem;
+            background: #e9f3ff;
+            border-radius: 6px;
+        }
         ul { list-style: none; padding-left: 1.5rem; margin: 0.5rem 0; }
         li { margin: 0.4rem 0; }
-        strong { color: #333; font-weight: 600; }
         a { color: #0d6efd; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        #back-to-top { position: fixed; bottom: 30px; right: 30px; background: #0d6efd; color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 1.7rem; cursor: pointer; display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        details[style*="display: none"], li[style*="display: none"] {transition: opacity 0.2s ease;}
-        .search-visible {opacity: 1;}
-        @media (prefers-color-scheme: dark) { body { background: #121212; color: #e0e0e0; } details { background: #1e1e1e; border-color: #444; } summary { background: #0d3b6e; color: #4dabf7; } strong { color: #ccc; } a { color: #4dabf7; } }
+
+        /* Sticky header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-bottom: 2px solid #0d6efd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        #realtime-clock {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #0d6efd;
+            margin-bottom: 12px;
+        }
+
+        /* Countdown area */
+        .timers-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            padding: 16px;
+        }
+        .timer-card {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-width: 260px;
+            max-width: 320px;
+            flex: 1;
+        }
+        .timer-card input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .timer-card input[type="number"] {
+            width: 70px;
+            text-align: center;
+            padding: 6px;
+        }
+        .timer-card button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0 6px 10px;
+        }
+        .start-btn { background: #28a745; color: white; }
+        .stop-btn  { background: #dc3545; color: white; }
+        .display {
+            font-size: 2rem;
+            font-weight: bold;
+            min-height: 40px;
+            color: #212529;
+        }
+        .running  { color: #28a745; }
+        .stopped  { color: #dc3545; }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body { background: #121212; color: #e0e0e0; }
+            details, .timer-card { background: #1e1e1e; border-color: #444; }
+            summary { background: #0d3b6e; color: #4dabf7; }
+            a { color: #4dabf7; }
+        }
+
+        /* Mobile improvements */
+        @media (max-width: 600px) {
+            #realtime-clock { font-size: 2rem; }
+            .display { font-size: 1.6rem; }
+            .timer-card button { padding: 10px 24px; font-size: 1rem; }
+        }
     </style>
 </head>
-    </div>
+<body>
+
+<div id="login-screen" style="position:fixed; inset:0; background:#fff; z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+    <h2>CPA Canada Handbook - Access Restricted</h2>
+    <p>PASSWORD</p>
+    <input type="password" id="passwordInput" style="padding:12px; font-size:1.3rem; width:90%; max-width:320px; margin:1rem 0;">
+    <button onclick="checkPassword()" style="padding:12px 40px; font-size:1.3rem; background:#0d6efd; color:white; border:none; border-radius:6px; cursor:pointer;">OPEN</button>
+    <p id="errorMsg" style="color:red; margin-top:1rem;"></p>
+</div>
+
+<div id="main-content" style="display:none;">
+
+<header>
+    <div id="realtime-clock">00:00:00</div>
+
+    <details>
+        <summary>Countdown Tool (Max 4)</summary>
+        <div class="timers-container">
+            <!-- Timer 1 -->
+            <div class="timer-card">
+                <input type="text" id="name1" placeholder="Timer Name">
+                <div style="display:flex; gap:10px; justify-content:center; margin:12px 0;">
+                    <input type="number" id="timer1-hour" min="0" placeholder="HH">
+                    <span>hours</span>
+                    <input type="number" id="timer1-min" min="0" max="59" placeholder="MM">
+                    <span>min</span>
+                </div>
+                <div style="text-align:center;">
+                    <button class="start-btn" onclick="startTimer(1)">Start</button>
+                    <button class="stop-btn"  onclick="stopTimer(1)">Stop</button>
+                </div>
+                <div id="display1" class="display">00:00:00</div>
+            </div>
+
+                         <!-- Timer 2 -->
+            <div class="timer-card">
+                <input type="text" id="name2" placeholder="Timer Name">
+                <div style="display:flex; gap:10px; justify-content:center; margin:12px 0;">
+                    <input type="number" id="timer2-hour" min="0" placeholder="HH">
+                    <span>hours</span>
+                    <input type="number" id="timer2-min" min="0" max="59" placeholder="MM">
+                    <span>min</span>
+                </div>
+                <div style="text-align:center;">
+                    <button class="start-btn" onclick="startTimer(2)">Start</button>
+                    <button class="stop-btn"  onclick="stopTimer(2)">Stop</button>
+                </div>
+                <div id="display2" class="display">00:00:00</div>
+            </div>
+
+                        <!-- Timer 3 -->
+            <div class="timer-card">
+                <input type="text" id="name3" placeholder="Timer Name">
+                <div style="display:flex; gap:10px; justify-content:center; margin:12px 0;">
+                    <input type="number" id="timer3-hour" min="0" placeholder="HH">
+                    <span>hours</span>
+                    <input type="number" id="timer3-min" min="0" max="59" placeholder="MM">
+                    <span>min</span>
+                </div>
+                <div style="text-align:center;">
+                    <button class="start-btn" onclick="startTimer(3)">Start</button>
+                    <button class="stop-btn"  onclick="stopTimer(3)">Stop</button>
+                </div>
+                <div id="display3" class="display">00:00:00</div>
+            </div>
+
+                        <!-- Timer 4 -->
+            <div class="timer-card">
+                <input type="text" id="name4" placeholder="Timer Name">
+                <div style="display:flex; gap:10px; justify-content:center; margin:12px 0;">
+                    <input type="number" id="timer4-hour" min="0" placeholder="HH">
+                    <span>hours</span>
+                    <input type="number" id="timer4-min" min="0" max="59" placeholder="MM">
+                    <span>min</span>
+                </div>
+                <div style="text-align:center;">
+                    <button class="start-btn" onclick="startTimer(4)">Start</button>
+                    <button class="stop-btn"  onclick="stopTimer(4)">Stop</button>
+                </div>
+                <div id="display4" class="display">00:00:00</div>
+            </div>
+
+        </div>
+    </details>
+</header>
 <body>
 <main>
     <h1>CPA Canada Handbook </h1>
@@ -1791,101 +1835,135 @@ function stopTimer(id) {
     </section>
 </main>
 
-    <button id="back-to-top" aria-label="Back to top">↑</button>
+<button id="back-to-top">↑</button>
 
 <script>
+// ==================== 密碼部分 ====================
+const correctPassword = "cpa2026handbook";
+
 function checkPassword() {
-            const input = document.getElementById('passwordInput').value.trim();
-            // 你可以改成你想要的密码（建议用 hash 更安全，但简单起见先用明文）
-            const correctPassword = "cpa2026handbook";  // ←←← 这里改成你自己的密码
+    const input = document.getElementById('passwordInput').value.trim();
+    if (input === correctPassword) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        localStorage.setItem('handbook_access', Date.now());
+    } else {
+        document.getElementById('errorMsg').textContent = 'Incorrect password, try again';
+    }
+}
 
-            if (input === correctPassword) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                // 可选：记住登录状态（1小时内不用再输）
-                localStorage.setItem('handbook_access', Date.now());
-            } else {
-                document.getElementById('errorMsg').textContent = '密码错误，请重试';
+window.addEventListener('load', () => {
+    const lastAccess = localStorage.getItem('handbook_access');
+    if (lastAccess && Date.now() - lastAccess < 3600 * 1000) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+    }
+});
+
+// ==================== 實時鐘 + 倒計時（使用 requestAnimationFrame 更穩定） ====================
+let lastTime = performance.now();
+const timers = [null, null, null, null]; // 每個計時器的剩餘秒數
+const intervals = [null, null, null, null]; // 不用了，但保留結構
+
+function formatTime(seconds) {
+    const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${h}:${m}:${s}`;
+}
+
+function updateAll() {
+    const now = performance.now();
+    const delta = (now - lastTime) / 1000; // 秒差
+    lastTime = now;
+
+    // 實時鐘
+    const realTime = new Date().toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+    document.getElementById('realtime-clock').textContent = realTime;
+
+    // 更新所有倒計時
+    for (let i = 0; i < 4; i++) {
+        if (timers[i] !== null && timers[i] > 0) {
+            timers[i] = Math.max(0, timers[i] - delta);
+            const display = document.getElementById(`display${i+1}`);
+            display.textContent = formatTime(Math.floor(timers[i]));
+            display.className = 'display running';
+
+            if (timers[i] <= 0) {
+                const name = document.getElementById(`name${i+1}`).value.trim() || `Timer ${i+1}`;
+                alert(`${name} - Time's up!`);
+                timers[i] = null;
+                display.className = 'display stopped';
             }
         }
+    }
 
-        // 页面加载时检查是否已登录
-        window.addEventListener('load', () => {
-            const lastAccess = localStorage.getItem('handbook_access');
-            if (lastAccess && Date.now() - lastAccess < 3600 * 1000) {  // 1小时有效
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-            }
-        });
+    requestAnimationFrame(updateAll);
+}
 
+requestAnimationFrame(updateAll);
 
+// 啟動倒計時
+window.startTimer = function(id) {
+    const h = parseInt(document.getElementById(`timer${id}-hour`).value) || 0;
+    const m = parseInt(document.getElementById(`timer${id}-min`).value) || 0;
+    let total = h * 3600 + m * 60;
 
-    const searchInput = document.getElementById('searchInput');
-    const allContainers = document.querySelectorAll('details, li');  // 所有可能需要隐藏的容器
+    if (total < 60) {
+        alert(`Timer ${id}: Minimum 1 minute`);
+        return;
+    }
 
-    // 初始化：给所有容器加一个 class，便于批量操作
-    allContainers.forEach(el => el.classList.add('search-visible'));
+    timers[id-1] = total;
+    document.getElementById(`display${id}`).textContent = formatTime(total);
+};
 
-    function performSearch(term) {
-        term = term.toLowerCase().trim();
+// 停止
+window.stopTimer = function(id) {
+    timers[id-1] = null;
+    document.getElementById(`display${id}`).textContent = '00:00:00';
+    document.getElementById(`display${id}`).className = 'display stopped';
+};
 
-        if (term === '') {
-            // 清空搜索，全部显示
-            allContainers.forEach(el => {
-                el.classList.add('search-visible');
-                el.style.display = '';
-            });
-            return;
-        }
+// ==================== 搜尋功能（保持原樣） ====================
+const searchInput = document.getElementById('searchInput');
+const allContainers = document.querySelectorAll('details, li');
 
-        // 先全部隐藏
-        allContainers.forEach(el => {
-            el.classList.remove('search-visible');
-            el.style.display = 'none';
-        });
+function performSearch(term) {
+    term = term.toLowerCase().trim();
+    if (!term) {
+        allContainers.forEach(el => { el.style.display = ''; });
+        return;
+    }
+    allContainers.forEach(el => { el.style.display = 'none'; });
 
-        // 找到所有匹配的文本节点（a, strong, summary）
-        const matches = Array.from(document.querySelectorAll('a, strong, summary'))
-            .filter(el => el.textContent.toLowerCase().includes(term));
-
-        // 对于每个匹配项，显示它自己 + 所有祖先 details/li
-        matches.forEach(match => {
-            let current = match;
+    document.querySelectorAll('a, strong, summary').forEach(el => {
+        if (el.textContent.toLowerCase().includes(term)) {
+            let current = el;
             while (current && current !== document.body) {
                 if (current.tagName === 'DETAILS' || current.tagName === 'LI') {
-                    current.classList.add('search-visible');
                     current.style.display = '';
                 }
                 current = current.parentElement;
             }
-        });
-
-        // 额外：如果 summary 匹配，也强制打开它的 details
-        document.querySelectorAll('summary').forEach(summary => {
-            if (summary.textContent.toLowerCase().includes(term)) {
-                const details = summary.closest('details');
-                if (details) {
-                    details.open = true;
-                    details.classList.add('search-visible');
-                    details.style.display = '';
-                }
-            }
-        });
-    }
-
-    searchInput.addEventListener('input', (e) => {
-        performSearch(e.target.value);
+        }
     });
+}
 
-    // 返回顶部按钮逻辑（保持不变）
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-        backToTop.style.display = window.scrollY > 400 ? 'block' : 'none';
-    });
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+searchInput.addEventListener('input', e => performSearch(e.target.value));
+
+// Back to top
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+    backToTop.style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
-    
+
 </body>
 </html>
