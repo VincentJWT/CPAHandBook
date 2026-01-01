@@ -11,6 +11,156 @@
 
     <div id="main-content" style="display:none;">
 
+<div style="position: sticky; top: 0; z-index: 1000; background: #ffffff; padding: 12px 20px; border-bottom: 2px solid #0d6efd; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center;">
+    <!-- 实时数字时钟（始终显示） -->
+    <div style="font-size: 2rem; font-weight: bold; color: #0d6efd; margin-bottom: 10px;">
+        <span id="realtime-clock">00:00:00</span>
+    </div>
+
+    <!-- 可折叠倒计时区域 -->
+    <details style="max-width: 1000px; margin: 10px auto; background: #f8f9fa; border-radius: 8px; overflow: hidden;">
+        <summary style="font-size: 1.3rem; font-weight: 600; padding: 12px; background: #e9f3ff; cursor: pointer; color: #0d6efd;">
+            Countdown Tool（Click to OPEN/CLOSE MAX 4）
+        </summary>
+        
+        <div style="padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+            <!-- Timer 1 -->
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
+                <input type="text" id="name1" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
+                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
+                    <input type="number" id="timer1-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
+                    <span>HOUR</span>
+                    <input type="number" id="timer1-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
+                    <span>MIN</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <button onclick="startTimer(1)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
+                    <button onclick="stopTimer(1)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
+                </div>
+                <div id="display1" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
+            </div>
+
+            <!-- Timer 2 -->
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
+                <input type="text" id="name2" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
+                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
+                    <input type="number" id="timer2-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
+                    <span>HOUR</span>
+                    <input type="number" id="timer2-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
+                    <span>MIN</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <button onclick="startTimer(2)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
+                    <button onclick="stopTimer(2)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
+                </div>
+                <div id="display2" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
+            </div>
+
+            <!-- Timer 3 -->
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
+                <input type="text" id="name3" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
+                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
+                    <input type="number" id="timer3-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
+                    <span>HOUR</span>
+                    <input type="number" id="timer3-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
+                    <span>MIN</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <button onclick="startTimer(3)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
+                    <button onclick="stopTimer(3)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
+                </div>
+                <div id="display3" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
+            </div>
+
+            <!-- Timer 4 -->
+            <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 280px;">
+                <input type="text" id="name4" placeholder="NAME" style="width: 100%; padding: 6px; margin-bottom: 8px; font-weight: bold; text-align: center;">
+                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 10px;">
+                    <input type="number" id="timer4-hour" min="0" placeholder="HOUR" style="width: 70px; text-align: center;">
+                    <span>HOUR</span>
+                    <input type="number" id="timer4-min" min="0" max="59" placeholder="MIN" style="width: 70px; text-align: center;">
+                    <span>MIN</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <button onclick="startTimer(4)" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 6px;">STAR</button>
+                    <button onclick="stopTimer(4)" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">STOP</button>
+                </div>
+                <div id="display4" style="font-size: 1.6rem; font-weight: bold; margin-top: 10px; color: #212529; min-height: 30px;">00:00:00</div>
+            </div>
+        </div>
+    </details>
+</div>
+
+<script>
+// 实时钟（保持不变）
+function updateClock() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('realtime-clock').textContent = timeString;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// 倒计时逻辑（精确到秒 + 自定义名称）
+let countdownIntervals = [null, null, null, null];
+let remainingSeconds = [0, 0, 0, 0]; // 记录每个计时器的剩余秒数
+
+function startTimer(id) {
+    const hourInput = document.getElementById(`timer${id}-hour`);
+    const minInput = document.getElementById(`timer${id}-min`);
+    
+    let totalSeconds = (parseInt(hourInput.value) || 0) * 3600 + (parseInt(minInput.value) || 0) * 60;
+    
+    if (totalSeconds <= 0) {
+        alert(`Timer ${id}：MINMUM 1 MIN`);
+        return;
+    }
+
+    // 清除旧计时器
+    if (countdownIntervals[id-1]) {
+        clearInterval(countdownIntervals[id-1]);
+    }
+
+    const display = document.getElementById(`display${id}`);
+    display.style.color = '#28a745'; // 绿色运行中
+
+    // 立即显示初始时间
+    const initHours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
+    const initMins = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
+    const initSecs = (totalSeconds % 60).toString().padStart(2, '0');
+    display.textContent = `${initHours}:${initMins}:${initSecs}`;
+
+    remainingSeconds[id-1] = totalSeconds;
+
+    countdownIntervals[id-1] = setInterval(() => {
+        remainingSeconds[id-1]--;
+        if (remainingSeconds[id-1] <= 0) {
+            clearInterval(countdownIntervals[id-1]);
+            countdownIntervals[id-1] = null;
+            display.textContent = '00:00:00';
+            display.style.color = '#dc3545'; // 红色结束
+            const timerName = document.getElementById(`name${id}`).value.trim() || `Timer ${id}`;
+            alert(`${timerName} TimesUp！`);
+            return;
+        }
+
+        const hours = Math.floor(remainingSeconds[id-1] / 3600).toString().padStart(2, '0');
+        const mins = Math.floor((remainingSeconds[id-1] % 3600) / 60).toString().padStart(2, '0');
+        const secs = (remainingSeconds[id-1] % 60).toString().padStart(2, '0');
+        display.textContent = `${hours}:${mins}:${secs}`;
+    }, 1000); // 每秒更新
+}
+
+function stopTimer(id) {
+    if (countdownIntervals[id-1]) {
+        clearInterval(countdownIntervals[id-1]);
+        countdownIntervals[id-1] = null;
+    }
+    const display = document.getElementById(`display${id}`);
+    display.textContent = '00:00:00';
+    display.style.color = '#212529'; // 默认色
+}
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
